@@ -1,0 +1,222 @@
+import React, { useState } from 'react';
+import { Heart, BookOpen, GraduationCap, Award, MapPin, Calendar, User, Sparkles, Camera, Utensils, Book, Trophy, Plane, Radio, Mountain, Pizza, Star } from 'lucide-react';
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState('identitas');
+
+  const identitas = {
+    nama: "Intan Pipit Rahma Wati",
+    ttl: "Magetan, 18 November 2007",
+    gender: "Perempuan",
+    alamat: "Ds. Manjung, Kec. Panekan, Kab. Magetan, Jawa Timur",
+    // Menggunakan foto yang baru diunggah
+    fotoProfil: "intan.jpg"
+  };
+
+  const hobi = [
+    { nama: "Memasak", icon: <Utensils className="text-orange-400" />, img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=300" },
+    { nama: "Membaca", icon: <Book className="text-blue-400" />, img: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&q=80&w=300" },
+    { nama: "Kuliner", icon: <Pizza className="text-yellow-500" />, img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=300" },
+    { nama: "Traveling", icon: <Plane className="text-purple-400" />, img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=300" },
+    { nama: "Hiking", icon: <Mountain className="text-emerald-500" />, img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=300" }
+  ];
+
+  const pendidikan = [
+    { level: "TK", nama: "TK DHARMA WANITA 1", tahun: "-", detail: "Pendidikan Awal" },
+    { level: "SD", nama: "SDN MANJUNG", tahun: "2014 - 2020", detail: "Eligible 1" },
+    { level: "SMP", nama: "SMPN 1 MAGETAN", tahun: "2020 - 2023", detail: "Eligible 3" },
+    { level: "SMA", nama: "SMAN 1 MAGETAN", tahun: "2023 - 2026", detail: "Saat Ini" }
+  ];
+
+  const prestasi = [
+    { judul: "Juara 1 Seleksi MIPA", sub: "Mapel Matematika SD Kec. Panekan", tahun: "2018/2019" },
+    { judul: "Eligible 1 SD", sub: "Peringkat terbaik di SDN Manjung", tahun: "2020" },
+    { judul: "Crew Majalah SNESMA", sub: "Pengalaman Jurnalistik Sekolah (SMP)", tahun: "2021 - 2023" },
+    { judul: "Eligible 3 SMP", sub: "Peringkat terbaik di SMPN 1 Magetan", tahun: "2023" },
+    { judul: "Mendaki Gunung Lawu", sub: "Pengalaman pendakian via jalur Cemorosewu", tahun: "2024" },
+    { judul: "Juara 1 KOMPAK", sub: "Mapel Bahasa Jawa (SMA)", tahun: "2024 - 2026" },
+    { judul: "Bendahara Broadcast", sub: "Ekstrakurikuler Penyiaran SMAN 1 Magetan", tahun: "2024 - 2026" },
+    { judul: "Mendaki Gunung Jobolarangan", sub: "Berhasil mencapai puncak (2 kali)", tahun: "2025" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#FFF0F5] via-[#FFE4E1] to-[#F3E5F5] text-slate-700 font-sans p-4 md:p-8 flex items-center justify-center">
+      <div className="max-w-5xl w-full bg-white/70 backdrop-blur-lg rounded-[2.5rem] shadow-2xl border border-white/50 overflow-hidden flex flex-col md:flex-row min-h-[650px] relative">
+        
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-pink-100/50 -rotate-2 z-10 shadow-sm border border-pink-200/50 hidden md:block"></div>
+
+        <div className="w-full md:w-1/3 bg-[#FFF5F7]/80 p-8 flex flex-col items-center border-b md:border-b-0 md:border-r border-pink-100 relative">
+          <div className="relative mb-6">
+            <div className="w-40 h-40 rounded-full border-8 border-white shadow-xl overflow-hidden bg-white flex items-center justify-center">
+              <img 
+                src={identitas.fotoProfil} 
+                alt="Foto Profil Intan" 
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center' }}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=300";
+                }}
+              />
+            </div>
+            <div className="absolute -bottom-1 -right-1 bg-pink-400 p-2.5 rounded-full shadow-lg border-2 border-white">
+              <Heart className="text-white fill-white" size={18} />
+            </div>
+          </div>
+          
+          <h1 className="text-2xl font-bold text-center text-pink-600 mb-1 tracking-tight">
+            {identitas.nama}
+          </h1>
+          <p className="text-xs text-purple-400 font-bold uppercase tracking-widest mb-8 flex items-center gap-2">
+            <Sparkles size={14} /> My Biography <Sparkles size={14} />
+          </p>
+          
+          <nav className="w-full space-y-3">
+            {[
+              { id: 'identitas', label: 'Identitas Diri', icon: <BookOpen size={18} /> },
+              { id: 'pendidikan', label: 'Pendidikan', icon: <GraduationCap size={18} /> },
+              { id: 'prestasi', label: 'Prestasi & Pengalaman', icon: <Award size={18} /> }
+            ].map((tab) => (
+              <button 
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 ${
+                  activeTab === tab.id 
+                    ? 'bg-pink-400 text-white shadow-lg scale-105 translate-x-2' 
+                    : 'bg-white hover:bg-pink-50 text-pink-400 shadow-sm'
+                }`}
+              >
+                {tab.icon}
+                <span className="font-semibold text-sm">{tab.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          <div className="mt-auto pt-8 text-center opacity-40">
+            <p className="text-[10px] font-medium tracking-widest uppercase">EST. 2025 • {identitas.nama}</p>
+          </div>
+        </div>
+
+        <div className="w-full md:w-2/3 p-8 md:p-12 overflow-y-auto max-h-[750px]">
+          {activeTab === 'identitas' && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="border-b-2 border-dashed border-pink-200 pb-4 flex justify-between items-end">
+                <h2 className="text-3xl font-bold text-pink-500 italic">About Me</h2>
+                <span className="text-xs text-slate-400 font-mono">Page 01</span>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {[
+                  { icon: <Calendar size={18} />, label: "TTL", value: identitas.ttl },
+                  { icon: <User size={18} />, label: "Gender", value: identitas.gender },
+                  { icon: <MapPin size={18} />, label: "Alamat", value: identitas.alamat, full: true }
+                ].map((item, i) => (
+                  <div key={i} className={`p-5 bg-white rounded-3xl border border-pink-50 shadow-sm hover:shadow-md transition-shadow ${item.full ? 'sm:col-span-2' : ''}`}>
+                    <div className="flex items-center gap-3 text-pink-400 mb-2">
+                      {item.icon}
+                      <span className="text-xs font-bold uppercase tracking-wider">{item.label}</span>
+                    </div>
+                    <p className="text-slate-600 font-medium leading-relaxed">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-pink-500 mb-4 flex items-center gap-2">
+                  <Camera size={20} /> My Hobbies & Joy
+                </h3>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                  {hobi.map((h, i) => (
+                    <div key={i} className="group relative overflow-hidden rounded-2xl shadow-sm aspect-square bg-pink-100">
+                      <img src={h.img} alt={h.nama} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-pink-600/90 via-pink-500/20 to-transparent flex flex-col justify-end p-4 text-white">
+                        <div className="flex items-center gap-2">
+                          <span className="bg-white/20 p-1.5 rounded-lg backdrop-blur-md">{h.icon}</span>
+                          <span className="text-sm font-bold tracking-wide">{h.nama}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'pendidikan' && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="border-b-2 border-dashed border-pink-200 pb-4 flex justify-between items-end">
+                <h2 className="text-3xl font-bold text-pink-500 italic">Education History</h2>
+                <span className="text-xs text-slate-400 font-mono">Page 02</span>
+              </div>
+              
+              <div className="relative border-l-2 border-pink-200 ml-4 space-y-8 py-4">
+                {pendidikan.map((item, i) => (
+                  <div key={i} className="relative pl-8">
+                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-pink-400 border-4 border-white shadow-sm"></div>
+                    <div className="bg-white p-6 rounded-3xl shadow-sm border border-pink-50 hover:-translate-y-1 transition-transform">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="inline-block px-3 py-1 bg-pink-100 text-pink-500 rounded-full text-[10px] font-bold uppercase tracking-tighter">
+                          {item.tahun}
+                        </span>
+                        <GraduationCap size={18} className="text-pink-200" />
+                      </div>
+                      <h4 className="text-lg font-bold text-slate-700">{item.nama}</h4>
+                      <p className="text-xs font-semibold text-pink-400 mt-1 uppercase tracking-widest">{item.level} — {item.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'prestasi' && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="border-b-2 border-dashed border-pink-200 pb-4 flex justify-between items-end">
+                <h2 className="text-3xl font-bold text-pink-500 italic">Experience & Awards</h2>
+                <span className="text-xs text-slate-400 font-mono">Page 03</span>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                {prestasi.map((p, i) => (
+                  <div key={i} className="group flex items-center gap-5 bg-white p-5 rounded-[2rem] border border-pink-50 shadow-sm hover:border-pink-200 hover:shadow-md transition-all">
+                    <div className={`p-4 rounded-2xl transition-colors ${
+                      p.judul.includes('Juara') ? 'bg-amber-50 text-amber-500' : 
+                      p.judul.includes('Mendaki') ? 'bg-emerald-50 text-emerald-500' : 
+                      p.judul.includes('Eligible') ? 'bg-blue-50 text-blue-500' : 
+                      'bg-indigo-50 text-indigo-500'
+                    }`}>
+                      {p.judul.includes('Mendaki') ? <Mountain size={24} /> : 
+                       p.judul.includes('Eligible') ? <Star size={24} /> : 
+                       p.judul.includes('Crew') || p.judul.includes('Broadcast') ? <Radio size={24} /> : 
+                       <Trophy size={24} />}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start">
+                        <h4 className="font-bold text-slate-700 leading-tight">{p.judul}</h4>
+                        <span className="text-[10px] font-bold text-pink-300 bg-pink-50 px-2 py-0.5 rounded-full">{p.tahun}</span>
+                      </div>
+                      <p className="text-sm text-slate-500 mt-1">{p.sub}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="relative p-8 bg-gradient-to-r from-pink-400 to-purple-400 rounded-[2.5rem] text-white shadow-xl overflow-hidden group mt-4">
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl transition-transform group-hover:scale-150"></div>
+                <div className="relative z-10 flex items-center justify-between">
+                  <div className="space-y-1">
+                    <h5 className="font-bold text-xl leading-tight flex items-center gap-2">Keep Blooming! 🌸</h5>
+                    <p className="text-sm opacity-90 italic">"Focus on the step in front of you, not the whole staircase."</p>
+                  </div>
+                  <Sparkles size={40} className="opacity-40 animate-pulse" />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
